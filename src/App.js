@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import TaskList from './TaskList'
 import tarefas from './assets/tarefas.json';

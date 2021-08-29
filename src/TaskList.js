@@ -35,7 +35,7 @@ export default class TaskList extends React.Component {
       ))
       return (
         <>
-          <h2>Questões</h2>
+          <h2>Lista de Atividades</h2>
           <button onClick={() => this.addTask()}>Adicionar Tarefa </button>
           {tarefas}
         </>
@@ -43,8 +43,8 @@ export default class TaskList extends React.Component {
     } else {
       return (
         <TaskForm
-          task={this.state.tarefas[this.state.current]}
-          onUpdate={(task) => this.updateChanges(task)}
+          tarefa={this.state.tarefas[this.state.current]}
+          onUpdate={(tarefa) => this.updateChanges(tarefa)}
           onCancel={() => this.cancelChanges()}
         />
       )
@@ -52,7 +52,7 @@ export default class TaskList extends React.Component {
   }
 
   addTask() {
-    const newTask = { atividade: '', tempoMinutos: 0, prioridade: 1 }
+    const newTask = { atividade: '', tempoMinutos: 0, prioridade: 0 }
     const tarefas = [...this.state.tarefas, newTask]
     this.setState({
         tarefas,

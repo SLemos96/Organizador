@@ -5,10 +5,22 @@ export function minLengthValidation(minLength, value) {
     return null
   }
   
-  export function requiredValidation(value) {
-    if (value.trim() === '') {
-      return 'Este campo é obrigatório'
+  export function requiredIntervalValidation(min, max, value) {
+    if(requiredNumericValidation(value)){ //conferindo se o valor é numérico
+      return requiredNumericValidation(value)
+    }
+    if(value.trim() < min || value.trim() > max){
+      return 'Este campo requer um valor entre 1 e 3'
     }
     return null
   }
-  
+
+  export function requiredNumericValidation(value) {
+    if (value.trim() === '') {
+      return 'Este campo é obrigatório'
+    }
+    if(!Number(value)){
+      return 'Este campo requer apenas números maiores que zero'
+    }
+    return null
+  }
