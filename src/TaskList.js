@@ -13,7 +13,8 @@ export default class TaskList extends React.Component {
 
   render() {
     if (this.state.mode === 'view') {
-      const tarefas = this.state.tarefas.map((q, i) => (
+      const tarefas = this.state.tarefas
+      .map((q, i) => (
         <p key={i}>
           <b>Tarefa: </b>
           {q.atividade}
@@ -36,17 +37,54 @@ export default class TaskList extends React.Component {
       return (
         <>
           <h2>Lista de Atividades</h2>
-          <button onClick={() => this.addTask()}>Adicionar Tarefa </button>
+          <button  className="m5" onClick={() => this.addTask()}>Adicionar Tarefa </button>
+          <button  className="m5" onClick={() => this.orderTask()}>Ordenar Tarefas </button>
           {tarefas}
         </>
       )
-    } else {
+    } else if (this.state.mode === 'add' || this.state.mode === 'edit') {
       return (
         <TaskForm
           tarefa={this.state.tarefas[this.state.current]}
           onUpdate={(tarefa) => this.updateChanges(tarefa)}
           onCancel={() => this.cancelChanges()}
         />
+      )
+    } else {
+      const tarefas = this.state.tarefas
+      .sort((a, b) => a.prioridade > b.prioridade ? 1 : -1)
+      .map((q, i) => (
+        <p key={i}>
+          <b>Tarefa: </b>
+          {q.atividade}
+          <br />
+          <b>Tempo previsto: </b>
+          {q.tempoMinutos} minutos
+          <br />
+          <b>Prioridade </b>
+          {q.prioridade}
+          <br/>
+          <button className="m5" onClick={() => this.editTask(i)}>
+            Editar
+          </button>
+          <button className="m5" onClick={() => this.removeTask(i)}>
+            Remover
+          </button>
+          <br/>
+        </p>
+      ))
+      return (
+        <>
+          <h2>Tarefas Ordenadas</h2>
+          <button  className="m5" onClick={() => this.addTask()}>Adicionar Tarefa </button>
+          <button  className="m5" onClick={() => this.orderTask()}>Ordenar Tarefas </button>
+          {tarefas}
+        </>
+        // <TaskForm
+        //   tarefa={this.state.tarefas[this.state.current]}
+        //   onUpdate={(tarefa) => this.updateChanges(tarefa)}
+        //   onCancel={() => this.cancelChanges()}
+        // />
       )
     }
   }
@@ -58,6 +96,14 @@ export default class TaskList extends React.Component {
         tarefas,
       mode: 'add',
       current: tarefas.length - 1
+    })
+  }
+
+  orderTask(){
+    const tarefas = [...this.state.tarefas]
+    this.setState({
+      tarefas,
+      mode: 'order'
     })
   }
 

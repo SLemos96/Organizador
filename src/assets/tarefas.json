@@ -1,12 +1,3 @@
 [
-    {
-        "atividade" : "estudar filosofia",
-        "tempoMinutos" : 25,
-        "prioridade" : 1
-    },
-    {
-        "atividade" : "jogar bola",
-        "tempoMinutos" : 60,
-        "prioridade" : 2
-    }
+    
 ]

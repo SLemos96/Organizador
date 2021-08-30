@@ -9,7 +9,7 @@ export function minLengthValidation(minLength, value) {
     if(requiredNumericValidation(value)){ //conferindo se o valor é numérico
       return requiredNumericValidation(value)
     }
-    if(value.trim() < min || value.trim() > max){
+    if(value < min || value > max){
       return 'Este campo requer um valor entre 1 e 3'
     }
     return null
