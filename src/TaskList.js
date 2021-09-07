@@ -5,7 +5,8 @@ export default class TaskList extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-        tarefas: props.tarefas,
+      suggestion: null,
+      tarefas: props.tarefas,
       mode: 'view',
       current: null
     }
@@ -38,6 +39,7 @@ export default class TaskList extends React.Component {
         <>
           <h2>Lista de Atividades</h2>
           <button  className="m5" onClick={() => this.addTask()}>Adicionar Tarefa </button>
+          <button  className="m5" onClick={() => this.receiveSuggestion()}>Receber sugestão de Tarefa </button>
           <button  className="m5" onClick={() => this.orderTask()}>Ordenar Tarefas </button>
           {tarefas}
         </>
@@ -87,6 +89,27 @@ export default class TaskList extends React.Component {
         // />
       )
     }
+  }
+
+  receiveSuggestion(){
+    
+    const urlRequest = 'https://www.boredapi.com/api/activity/';
+    fetch(urlRequest)
+    .then((res) => res.json())
+    .then((repos) => {
+      this.setState({
+        suggestion: repos
+      })
+      console.log(suggestion)
+    });
+    const suggestion = this.state.suggestion;
+    const newTask = { atividade: suggestion.activity, tempoMinutos: 0, prioridade: 0 }
+    const tarefas = [...this.state.tarefas, newTask]
+    this.setState({
+      tarefas,
+    mode: 'add',
+    current: tarefas.length - 1
+  })
   }
 
   addTask() {
