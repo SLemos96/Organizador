@@ -4,12 +4,14 @@ import TaskForm from './TaskForm'
 export default class TaskList extends React.Component {
   constructor(props) {
     super(props)
+    //colocar a primeira chamada da sugestão aqui
     this.state = {
-      suggestion: null,
+      suggestion: { activity: '', tempoMinutos: 0, prioridade: 0 },
       tarefas: props.tarefas,
       mode: 'view',
       current: null
     }
+    this.preencherSuggestion();
   }
 
   render() {
@@ -79,6 +81,7 @@ export default class TaskList extends React.Component {
         <>
           <h2>Tarefas Ordenadas</h2>
           <button  className="m5" onClick={() => this.addTask()}>Adicionar Tarefa </button>
+          <button  className="m5" onClick={() => this.receiveSuggestion()}>Receber sugestão de Tarefa </button>
           <button  className="m5" onClick={() => this.orderTask()}>Ordenar Tarefas </button>
           {tarefas}
         </>
@@ -91,8 +94,8 @@ export default class TaskList extends React.Component {
     }
   }
 
-  receiveSuggestion(){
-    
+  // preenchendo o suggestion com informações para o primeiro clique.
+  preencherSuggestion(){
     const urlRequest = 'https://www.boredapi.com/api/activity/';
     fetch(urlRequest)
     .then((res) => res.json())
@@ -102,6 +105,20 @@ export default class TaskList extends React.Component {
       })
       console.log(suggestion)
     });
+    const suggestion = this.state.suggestion;
+  }
+
+  receiveSuggestion(){
+    this.preencherSuggestion();
+    // const urlRequest = 'https://www.boredapi.com/api/activity/';
+    // fetch(urlRequest)
+    // .then((res) => res.json())
+    // .then((repos) => {
+    //   this.setState({
+    //     suggestion: repos
+    //   })
+    //   console.log(suggestion)
+    // });
     const suggestion = this.state.suggestion;
     const newTask = { atividade: suggestion.activity, tempoMinutos: 0, prioridade: 0 }
     const tarefas = [...this.state.tarefas, newTask]
