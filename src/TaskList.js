@@ -177,17 +177,38 @@ export default class TaskList extends React.Component {
     this.setState({ tarefas })
 
     let tempo = 60;
-    wait(tempo);
+    wait("inverno");
   }
 
-  wait(tempo) {
-    setInterval(()=> {
+  wait(estacao, tempo = -1) {
+    let cons;
+
+    if(tempo = -1){
+
+      if(estacao == "verão"){
+        tempo = 1;
+        cons = "É verão o ano todo";
+      }
+      if(estacao == "inverno"){
+        tempo = 9999;
+        cons = ":3 diliça";
+      }
+      if(estacao == "outono"){
+        tempo = 60;
+        cons = "Logo logo é inverno hehe buoy";
+      }
+      if(estacao == "primavera"){
+        tempo = 60;
+        cons = "esquece dessa merda de verão ai, porra";
+      }
+    }
+    const clock = setInterval(()=> {
       if(tempo > 0){
-        console.log(`tempo restante nevando :3 ${tempo}s`)
-        this.wait(tempo - 1);
+        console.log(`${estacao}: ${tempo}s - ${cons}`)
+        tempo-=1;
       }
       else
-      console.log("terminou :(");
+        clearInterval(clock);
     }, 1000);
   }
 }
