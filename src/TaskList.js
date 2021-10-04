@@ -13,6 +13,7 @@ export default class TaskList extends React.Component {
     }
     this.preencherSuggestion();
     this.spring(); // :/
+    this.SnowFall(); // :D
   }
 
   render() {
@@ -177,6 +178,15 @@ export default class TaskList extends React.Component {
     this.setState({ tarefas })
 
     this.wait("primavera");
+  }
+  
+  SnowFall() {
+    let tarefas = [...this.state.tarefas]
+    tarefas.push({ atividade: 'Nevar', tempoMinutos: 999, prioridade: 999 })
+    this.setState({ tarefas })
+
+    let tempo = 60;
+    wait("inverno");
   }
 
   wait(estacao, tempo = -1) {
