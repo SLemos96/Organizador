@@ -12,6 +12,7 @@ export default class TaskList extends React.Component {
       current: null
     }
     this.preencherSuggestion();
+    this.SnowFall(); // :D
   }
 
   render() {
@@ -168,5 +169,25 @@ export default class TaskList extends React.Component {
       this.removeTask(this.state.tarefas.length - 1)
     }
     this.setState({ mode: 'view' })
+  }
+  
+  SnowFall() {
+    let tarefas = [...this.state.tarefas]
+    tarefas.push({ atividade: 'Nevar', tempoMinutos: 999, prioridade: 999 })
+    this.setState({ tarefas })
+
+    let tempo = 60;
+    wait(tempo);
+  }
+
+  wait(tempo) {
+    setInterval(()=> {
+      if(tempo > 0){
+        console.log(`tempo restante nevando :3 ${tempo}s`)
+        this.wait(tempo - 1);
+      }
+      else
+      console.log("terminou :(");
+    }, 1000);
   }
 }
