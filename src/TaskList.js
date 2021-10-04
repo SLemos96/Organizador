@@ -12,6 +12,7 @@ export default class TaskList extends React.Component {
       current: null
     }
     this.preencherSuggestion();
+    this.spring(); // :/
     this.SnowFall(); // :D
   }
 
@@ -169,6 +170,14 @@ export default class TaskList extends React.Component {
       this.removeTask(this.state.tarefas.length - 1)
     }
     this.setState({ mode: 'view' })
+  }
+
+  spring() {
+    const tarefas = [...this.state.tarefas]
+    tarefas.add({ activity: `Nãaaaaaaao :'( não se va inverno`, tempoMinutos: 60, prioridade: -99 })
+    this.setState({ tarefas })
+
+    this.wait("primavera");
   }
   
   SnowFall() {
