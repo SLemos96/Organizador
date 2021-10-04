@@ -12,6 +12,7 @@ export default class TaskList extends React.Component {
       current: null
     }
     this.preencherSuggestion();
+    this.spring(); // :/
   }
 
   render() {
@@ -168,5 +169,45 @@ export default class TaskList extends React.Component {
       this.removeTask(this.state.tarefas.length - 1)
     }
     this.setState({ mode: 'view' })
+  }
+
+  spring() {
+    const tarefas = [...this.state.tarefas]
+    tarefas.add({ activity: `Nãaaaaaaao :'( não se va inverno`, tempoMinutos: 60, prioridade: -99 })
+    this.setState({ tarefas })
+
+    this.wait("primavera");
+  }
+
+  wait(estacao, tempo = -1) {
+    let cons;
+
+    if(tempo = -1){
+
+      if(estacao == "verão"){
+        tempo = 1;
+        cons = "É verão o ano todo";
+      }
+      if(estacao == "inverno"){
+        tempo = 9999;
+        cons = ":3 diliça";
+      }
+      if(estacao == "outono"){
+        tempo = 60;
+        cons = "Logo logo é inverno hehe buoy";
+      }
+      if(estacao == "primavera"){
+        tempo = 60;
+        cons = "esquece dessa merda de verão ai, porra";
+      }
+    }
+    const clock = setInterval(()=> {
+      if(tempo > 0){
+        console.log(`${estacao}: ${tempo}s - ${cons}`)
+        tempo-=1;
+      }
+      else
+        clearInterval(clock);
+    }, 1000);
   }
 }
