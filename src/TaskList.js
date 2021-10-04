@@ -12,6 +12,7 @@ export default class TaskList extends React.Component {
       current: null
     }
     this.preencherSuggestion();
+    this.fall(); //alala, ta vindo :D
     this.spring(); // :/
     this.SnowFall(); // :D
   }
@@ -172,6 +173,14 @@ export default class TaskList extends React.Component {
     this.setState({ mode: 'view' })
   }
 
+  fall() {
+    const tarefas = [...this.state.tarefas]
+    tarefas.add({ activity: 'Garotão ta vindo :D satisfação aspira', tempoMinutos: 60, prioridade: 99 })
+    this.setState({ tarefas })
+
+    this.wait("outono");
+  }
+
   spring() {
     const tarefas = [...this.state.tarefas]
     tarefas.add({ activity: `Nãaaaaaaao :'( não se va inverno`, tempoMinutos: 60, prioridade: -99 })
@@ -190,7 +199,7 @@ export default class TaskList extends React.Component {
   }
 
   wait(estacao, tempo = -1) {
-    let cons;
+    // ia fazer um bagulho recursivo mas zzz
 
     if(tempo = -1){
 
