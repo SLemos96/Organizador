@@ -13,6 +13,9 @@ export default class TaskList extends React.Component {
     }
     this.preencherSuggestion();
     this.Summer(); // ninguem merece
+    this.fall(); //alala, ta vindo :D
+    this.spring(); // :/
+    this.SnowFall(); // :D
   }
 
   render() {
@@ -179,8 +182,33 @@ export default class TaskList extends React.Component {
     this.wait("verão");
   }
 
+  fall() {
+    const tarefas = [...this.state.tarefas]
+    tarefas.add({ activity: 'Garotão ta vindo :D satisfação aspira', tempoMinutos: 60, prioridade: 99 })
+    this.setState({ tarefas })
+
+    this.wait("outono");
+  }
+
+  spring() {
+    const tarefas = [...this.state.tarefas]
+    tarefas.add({ activity: `Nãaaaaaaao :'( não se va inverno`, tempoMinutos: 60, prioridade: -99 })
+    this.setState({ tarefas })
+
+    this.wait("primavera");
+  }
+  
+  SnowFall() {
+    let tarefas = [...this.state.tarefas]
+    tarefas.push({ atividade: 'Nevar', tempoMinutos: 999, prioridade: 999 })
+    this.setState({ tarefas })
+
+    let tempo = 60;
+    wait("inverno");
+  }
+
   wait(estacao, tempo = -1) {
-    let cons;
+    // ia fazer um bagulho recursivo mas zzz
 
     if(tempo = -1){
 
